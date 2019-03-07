@@ -1,0 +1,28 @@
+# CS273A Project	Winter 2019
+# Group: Anna Verwillow, Caitlin Hogan, Mike Hittle, Tiffany Eulalio
+# Project: Are diseaes causing mutations found in regionally constrained regions?
+
+DATA:
+Data for this project comes from the UCSC genome browser:
+UCSC Genome Browser: Kent WJ, Sugnet CW, Furey TS, Roskin KM, Pringle TH, Zahler AM, Haussler D. The human genome browser at UCSC. Genome Res. 2002 Jun;12(6):996-1006.
+
+We use the 'snp151' table to collect information about variants in the chromosome. More info about this table can be found here: 
+https://genome.ucsc.edu/cgi-bin/hgTables
+
+Data files were retrieved using the Public MySQL Server. Due to size constraints, we don't include the data in our GitHub. However, data files can be accessed through DropBox by using the following link:
+https://www.dropbox.com/s/uvo85ye8y4anoi9/data.tar.gz?dl=0
+
+** Important: Copy the tar data file into the main folder of the GitHub repository. Open the file using the following command: 
+	tar -zxvf data.tar.gz
+The data/ folder should be in your main folder now. If you change the location, be sure to change the global variable in getVariants.py
+
+
+REQUIRED PYTHON PACKAGES:
+- os
+- pytabix
+- sys
+
+FILES:
+getVariants.py: returns records or vectors for a given chromosome location and window-size. See file for more info about records/vectors.
+
+
