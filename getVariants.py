@@ -28,6 +28,8 @@ import sys
 # 'python3 getVariants.py 10 10660 50'
 #	returns 32 vectors
 
+# NOTE: to see what records or vectors look like,
+# search for "uncomment" to find test print statements
 
 
 # global variables for data file locations and names
