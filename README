@@ -9,6 +9,8 @@ UCSC Genome Browser: Kent WJ, Sugnet CW, Furey TS, Roskin KM, Pringle TH, Zahler
 We use the 'snp151' table to collect information about variants in the chromosome. More info about this table can be found here: 
 https://genome.ucsc.edu/cgi-bin/hgTables
 
+
+
 Data files were retrieved using the Public MySQL Server. Due to size constraints, we don't include the data in our GitHub. However, data files can be accessed through DropBox by using the following link:
 https://www.dropbox.com/s/uvo85ye8y4anoi9/data.tar.gz?dl=0
 
@@ -17,12 +19,34 @@ https://www.dropbox.com/s/uvo85ye8y4anoi9/data.tar.gz?dl=0
 The data/ folder should be in your main folder now. If you change the location, be sure to change the global variable in getVariants.py
 
 
+
+Alternatively, we have included files to automatically retrieve the data from UCSC using MySQL. These files will take a considerable amount of time to download all SNPs in the genome. 'get_snps' will download the data and 'create_tbi' will process the data to be used with our programs.
+
+-------------------------------------------------------------------
+
 REQUIRED PYTHON PACKAGES:
 - os
 - pytabix
 - sys
+- tabix
+- gunzip
+
+-------------------------------------------------------------------
 
 FILES:
-getVariants.py: returns records or vectors for a given chromosome location and window-size. See file for more info about records/vectors.
+
+get_snps (bash script): 
+downloads data files containing SNPs from the genome from UCSC genome browser. The SNP data files will be stored in a folder named data/ in the current directory. This only needs to run if the data wasn't alredy downloaded from DropBox. This script takes a LONG time to download all of the SNPs. MySWL client libraries must be installed on your computer. Must run 'create_tbi' before the data is usable with our program.
+
+
+get_tbi (bash script): 
+create the .tbi files for the downloaded data files. This allows for quicker access to the data while quering chromosome positions. Must run this after downloading the data. Data files are stored in the data/ folder.
+
+
+getVariants.py: 
+returns records or vectors for a given chromosome location and window-size. See file for more info about records/vectors.
+
+1000genomes (directory):
+contains files to download data from the 1000 genomes project and to process the data files into a managable format and size. We switched from using this data to the UCSC data. This data is not currently incorporated, however could be in future work.
 
 
