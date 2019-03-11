@@ -1,0 +1,15 @@
+#/bin/bash
+
+# REQUIRED:
+# - gunzip
+# - tabix
+
+# This script will create vcf.gz and vcf.gz.tbi index files for all chromosome vcf files
+# to allow for quick access to genome files
+
+for filename in data/*.vcf;
+	do
+		echo "$filename"
+		bgzip -c $filename > $filename.gz
+		tabix -p vcf $filename.gz
+	done

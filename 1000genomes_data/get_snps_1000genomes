@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# This script downloads variants from the 1000 genomes project, which can also be found and queried through the UCSC table browser:
+# http://www.internationalgenome.org/
+
+
+# chromosome files will be stored in a folder named data/
+
+
+# create data dir
+mkdir -p data/
+
+# download chromosomes 1-22
+for i in `seq 1 22`;
+do
+	echo "processing chromosome $i"
+	tabix ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/supporting/functional_annotation/unfiltered/ALL.chr$i.phase3_shapeit2_mvncall_integrated_v5_func_anno.20130502.sites.vcf.gz $i | awk '{printf "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n", $1, $2, $3, $4, $5, $6, $7, $8}' > data/chr${i}_1000genomes.vcf
+	rm ALL.chr$i.phase3_shapeit2_mvncall_integrated_v5_func_anno.20130502.sites.vcf.gz.tbi
+done
+
+
+# download chromosome X
+i='X'
+tabix ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/supporting/functional_annotation/unfiltered/ALL.chr$i.phase3_shapeit2_mvncall_integrated_v5_func_anno.20130502.sites.vcf.gz $i | awk '{printf "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n", $1, $2, $3, $4, $5, $6, $7, $8}' > data/chr${i}_1000genomes.vcf
+rm ALL.chr$i.phase3_shapeit2_mvncall_integrated_v5_func_anno.20130502.sites.vcf.gz.tbi
+
+i='Y'
+# download chromosome Y
+tabix ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/supporting/functional_annotation/unfiltered/ALL.chr$i.phase3_shapeit2_mvncall_integrated_v5_func_anno.20130502.sites.vcf.gz $i | awk '{printf "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n", $1, $2, $3, $4, $5, $6, $7, $8}' > data/chr${i}_1000genomes.vcf
+rm ALL.chr$i.phase3_shapeit2_mvncall_integrated_v5_func_anno.20130502.sites.vcf.gz.tbi
+

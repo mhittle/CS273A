@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# REQUIRED: 
+# - MySQL client libraries must be installed on your computer: https://dev.mysql.com/downloads/mysql/5.0.html
+
+# This script downloads variants from the snp151 table in the UCSC genome browser, which can also be found and queried through the UCSC table browser:
+# https://genome.ucsc.edu/cgi-bin/hgTables?hgsid=714433367_Q6eMuLjen89kIzVC6ILNe0wbtJ9s&clade=mammal&org=Human&db=hg38&hgta_group=allTracks&hgta_track=snp151&hgta_table=0&hgta_regionType=genome&position=chr1&hgta_outputType=primaryTable&hgta_outFileName=
+
+# For more info on UCSC using MySQL: https://genome.ucsc.edu/goldenpath/help/mysql.html
+
+
+
+# chromosome files will be stored in a folder named data/
+
+
+# create data dir
+mkdir -p data/
+
+# download chromosomes 1-22
+for i in `seq 1 22`; do
+	echo "Processing chrom $i"
+	mysql --user=genome --host=genome-mysql.cse.ucsc.edu -A -D hg38 -N -e "SELECT chrom,chromStart,strand,refUCSC,observed,molType,func,alleleFreqCount,alleles,alleleFreqs FROM snp151 WHERE chrom='chr$i';" > data/chr${i}_ucsc_snp151.vcf
+done
+
+# download chromosome X
+i='X'
+echo "Processing chrom $i"
+mysql --user=genome --host=genome-mysql.cse.ucsc.edu -A -D hg38 -N -e "SELECT chrom,chromStart,strand,refUCSC,observed,molType,func,alleleFreqCount,alleles,alleleFreqs FROM snp151 WHERE chrom='chr$i';" > data/chr${i}_ucsc_snp151.vcf
+
+# download chromosome Y
+i='Y'
+echo "Processing chrom $i"
+mysql --user=genome --host=genome-mysql.cse.ucsc.edu -A -D hg38 -N -e "SELECT chrom,chromStart,strand,refUCSC,observed,molType,func,alleleFreqCount,alleles,alleleFreqs FROM snp151 WHERE chrom='chr$i';" > data/chr${i}_ucsc_snp151.vcf
+
